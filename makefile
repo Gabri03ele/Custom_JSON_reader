@@ -1,16 +1,15 @@
 OPTIONS=-O3 -DNDEBUG -Wall -Wextra
 
-all: build/theanswer
+all: build/res
 
 debug: OPTIONS=-O0 -g -DDEBUG -Wall -Wextra
-debug: build/theanswer
+debug: build/res
 
-build/theanswer: build/functions.o tools/main.c
-	gcc ${OPTIONS} tools/main.c -o build/theanswer -I include/ build/functions.o
+build/res: build/res.o tools/main.cpp
+	gcc ${OPTIONS} tools/main.cpp -o build/res -I include/ build/res.o
 
-build/functions.o: src/functions.c include/myfunctions.h
-	gcc ${OPTIONS} -c src/functions.c -o build/functions.o -I include/
+build/res.o: src/json.cpp include/json.hpp
+	gcc ${OPTIONS} -c src/json.cpp -o build/res.o -I include/
 
 clean:
-	rm -rf build/*.o build/theanswer
-
+	rm -rf build/*.o build/res
